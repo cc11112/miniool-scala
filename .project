@@ -6,7 +6,7 @@
 	</projects>
 	<buildSpec>
 		<buildCommand>
-			<name>miniool-scala</name>
+			<name>ch.epfl.lamp.sdt.core.scalabuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
