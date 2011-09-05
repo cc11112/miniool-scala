@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>MinioolScala</name>
+	<name>miniool-scala</name>
 	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
 		<buildCommand>
-			<name>ch.epfl.lamp.sdt.core.scalabuilder</name>
+			<name>miniool-scala</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
