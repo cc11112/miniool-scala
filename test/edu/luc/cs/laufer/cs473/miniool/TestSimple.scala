@@ -5,9 +5,9 @@ import org.scalatest.junit.AssertionsForJUnit
 
 class TestSimple extends TestCase with AssertionsForJUnit {
 
-  def studentCourseRecord() = new Clazz("firstExamScore", "secondExamScore", "totalScore")
-  def studentSemRecord() = new Clazz("course1", "course2")
-  
+  val studentCourseRecord = new Clazz("firstExamScore", "secondExamScore", "totalScore")
+  val studentSemRecord = new Clazz("course1", "course2")
+
   val store = Map[String, Cell](
     "q" -> Cell(0),
     "r" -> Cell(0)
@@ -37,23 +37,23 @@ class TestSimple extends TestCase with AssertionsForJUnit {
 //    assert(store("q").get.left.get === 60)
 //    assert(store("r").get.right.get.getField("course1").get.right.get.getField("firstExamScore").get.left.get === 45)
 //  }
-  
+
   def testMain2() {
 	val store2 = Map[String, Cell](
 	  "q" -> Cell(60),
 	  "r" -> Cell(Right(Instance(None,Map(
 	 		  "course1" -> Cell(Right(Instance(None,Map(
-	 		 		  "firstExamScore" -> Cell(Left(45)), 
-	 		 		  "secondExamScore" -> Cell(Left(35)), 
+	 		 		  "firstExamScore" -> Cell(Left(45)),
+	 		 		  "secondExamScore" -> Cell(Left(35)),
 	 		 		  "totalScore" -> Cell(Left(60))
-	 		  ),Map()))), 
+	 		  ),Map()))),
 	 		  "course2" -> Cell(Right(Instance(None,Map(
-	 		 		  "firstExamScore" -> Cell(Left(45)), 
-	 		 		  "secondExamScore" -> Cell(Left(35)), 
+	 		 		  "firstExamScore" -> Cell(Left(45)),
+	 		 		  "secondExamScore" -> Cell(Left(35)),
 	 		 		  "totalScore" -> Cell(Left(60))
 	 		  ),Map())))),Map()))
 	  )
-	)  
+	)
 	Execute(store)(s)
 	assert(store === store2)
   }

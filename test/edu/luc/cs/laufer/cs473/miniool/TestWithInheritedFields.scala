@@ -20,7 +20,7 @@ class TestWithInheritedFields extends TestCase with AssertionsForJUnit {
     }
   */
 
-  def C(): Clazz = new Clazz(
+  val C = new Clazz(
     Seq("value"),
     Seq(
       "set" -> (Seq("v"), Assignment(Selection(Variable("this"), "value"), Variable("0"))),
@@ -28,8 +28,8 @@ class TestWithInheritedFields extends TestCase with AssertionsForJUnit {
     )
   )
 
-  def D(): Clazz = new Clazz(
-    Some(C()),
+  val D = new Clazz(
+    C,
     Seq("value"),
     Seq(
       "set2" -> (Seq("v"), Assignment(Selection(Variable("this"), "value"), Variable("0"))),

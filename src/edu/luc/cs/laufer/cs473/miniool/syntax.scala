@@ -4,7 +4,7 @@ import SyntacticTypes.{Method, MethodBinding}
 
 object SyntacticTypes {
   /**
-   * A method has a list of local variables and a body. 
+   * A method has a list of local variables and a body.
    */
   type Method = (Seq[String], Statement)
   /**
@@ -56,12 +56,20 @@ case class If(guard: Statement, thenBranch: Statement, elseBranch: Statement) ex
 
 /**
  * Syntax for statements for creating and using records.
- * The argument to the New constructor is a function that returns a Clazz
- * so that Clazzes can refer to themselves (for creating new instances
- * of themselves etc.; please see myInt).
+ * New is implemented as a non-case class to allow the companion object
+ * to hide the function behind a by-name argument and add back the
+ * syntactic sugar to make it look like a case class.
  */
-case class New(fClazz: () => Clazz) extends Statement {
-  require(fClazz != null)
+class New(c: () => Clazz) extends Statement {
+  require(c != null)
+  val clazz = c
+}
+object New {
+  def apply(clazz: => Clazz) = new New(() => clazz)
+  def unapply(s: Statement) = s match {
+    case n: New => Some(n.clazz())
+    case _ => None
+  }
 }
 case class Selection(receiver: Statement, field: String) extends Statement {
   require(receiver != null)
@@ -87,6 +95,7 @@ case class Clazz(zuper: Option[Clazz], fields: Seq[String], methods: Seq[MethodB
   require(! methods.contains(null))
 
   def this(zuper: Option[Clazz], fields: String*) = this(zuper, fields, Seq())
+  def this(zuper: Clazz, fields: Seq[String], methods: Seq[MethodBinding]) = this(Some(zuper), fields, methods)
   def this(fields: Seq[String], methods: Seq[MethodBinding]) = this(None, fields, methods)
   def this(fields: String*) = this(None, fields, Seq())
   def this() = this(None, Seq(), Seq())

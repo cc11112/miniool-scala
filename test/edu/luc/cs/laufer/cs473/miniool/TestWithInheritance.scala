@@ -16,15 +16,15 @@ class TestWithInheritance extends TestCase with AssertionsForJUnit {
             @Override public String hello() { return 4; } }
   */
 
-  def C(): Clazz = new Clazz(
+  val C = new Clazz(
     Seq(),
     Seq(
       "hello" -> (Seq(), Constant(1))
     )
   )
 
-  def D(): Clazz = new Clazz(
-    Some(C()),
+  val D = new Clazz(
+    C,
     Seq(),
     Seq(
       "hello" -> (Seq(), Constant(2)),
@@ -32,8 +32,8 @@ class TestWithInheritance extends TestCase with AssertionsForJUnit {
     )
   )
 
-  def E(): Clazz = new Clazz(
-    Some(D()),
+  val E = new Clazz(
+    D,
     Seq(),
     Seq(
       "hello" -> (Seq(), Constant(4))

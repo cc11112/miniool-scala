@@ -25,10 +25,10 @@ class TestFibonacci extends TestCase with AssertionsForJUnit {
  * }
  */
 
-def MyFib(): Clazz = new Clazz(
+val MyFib = new Clazz(
   Seq("value"),
   Seq(
-    "init" -> (Seq(), 
+    "init" -> (Seq(),
       Assignment(Selection(Variable("this"), "value"), Variable("0"))),
     "helpFib" -> (Seq(),
     // TODO your job

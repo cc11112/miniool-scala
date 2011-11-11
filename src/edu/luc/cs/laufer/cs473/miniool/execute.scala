@@ -60,7 +60,7 @@ case class Instance(zuper: Option[Instance], fields: Map[String, Cell], methods:
 }
 
 /**
- * An interpreter for expressions and statements. 
+ * An interpreter for expressions and statements.
  * It evaluates a Statement down to a Cell (l-value) containing the result.
  * If desired, the result (r-value) can be accessed in an additional step.
  */
@@ -85,22 +85,19 @@ object Execute {
       }
       Cell.NULL
     }
-    case New(fClazz) => {
-      // apply the fClazz to obtain a Clazz instance
-      // and use pattern matching to obtain the constituents
-      val Clazz(zuper, fields, methods) = fClazz()
+    case New(Clazz(zuper, fields, methods)) => {
       // create an object based on the list of field names and methods
       val fs = Map(fields.map(field => (field, Cell(0))): _*)
       val ms = Map(methods: _*)
-      val z = zuper map ((z: Clazz) => apply(null)(New(() => z)).get.right.get)
+      val z = zuper map ((z: Clazz) => apply(Map.empty)(New(z)).get.right.get)
       Cell(Right(Instance(z, fs, ms)))
     }
     case Selection(receiver, field) => {
       // assume the expression evaluates to a record (.right)
       // and choose the desired field
       val rec = apply(store)(receiver)
-      // if this selection is on the receiver of the current method, 
-      // then look for the field in the static scope of the method 
+      // if this selection is on the receiver of the current method,
+      // then look for the field in the static scope of the method
       if (! store.contains("this") || rec.get.right.get != store("this").get.right.get) {
     	  rec.get.right.get.getField(field)
       } else {
@@ -125,7 +122,7 @@ object Execute {
       // augment the store with these new bindings
       // plus bindings for the pseudo-variables this, scope (static this), and super
       val storeWithBindings = store +
-      	("this" -> rec) + ("scope" -> Cell(Right(scope))) + ("super" -> zup) ++ 
+      	("this" -> rec) + ("scope" -> Cell(Right(scope))) + ("super" -> zup) ++
       	argBindings ++ localBindings
       // finally execute the resulting Statement in the augmented store
       // (note that this automatically returns the result if there is one)

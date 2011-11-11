@@ -18,7 +18,7 @@ class TestWithMethods extends TestCase with AssertionsForJUnit {
   }
  */
 
-def MyInt(): Clazz = new Clazz(
+val MyInt: Clazz = new Clazz(
   Seq("value"),
   Seq(
     "echo" ->

@@ -26,12 +26,12 @@ class TestMyInt extends TestCase with AssertionsForJUnit {
  * }
  */
 
-def MyInt(): Clazz = new Clazz(
+val MyInt: Clazz = new Clazz(
   Seq("value"),
   Seq(
-    "init" -> (Seq(), 
+    "init" -> (Seq(),
       Assignment(Selection(Variable("this"), "value"), Variable("0"))),
-    "itimes" -> (Seq(), 
+    "itimes" -> (Seq(),
    	  If(Variable("0"),
 		Plus(
 		  Selection(Variable("this"), "value"),
@@ -77,7 +77,7 @@ def MyInt(): Clazz = new Clazz(
     Assignment(Variable("u"), Message(Variable("z"), "itimes", Constant(8))),
     // TODO your job: replace the assignment to v by the following one:
     // v = z.minus(10).times(4).uminus().times(3).minus(7).intValue();
-    Assignment(Variable("v"), Constant(0)) 
+    Assignment(Variable("v"), Constant(0))
   )
 
   def testMain() {

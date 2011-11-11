@@ -11,7 +11,7 @@ class TestRecursive extends TestCase with AssertionsForJUnit {
     "s" -> Cell(0)
   )
 
-  def listNode() = new Clazz("value", "next")
+  val ListNode = new Clazz("value", "next")
 
   /*
    * n = new ListNode
@@ -32,16 +32,16 @@ class TestRecursive extends TestCase with AssertionsForJUnit {
 
   val s =
     Sequence(
-      Assignment(Variable("n"), New(listNode)),
+      Assignment(Variable("n"), New(ListNode)),
       Assignment(Variable("h"), Variable("n")),
       Assignment(Selection(Variable("n"), "value"), Constant(2)),
-      Assignment(Selection(Variable("n"), "next"), New(listNode)),
+      Assignment(Selection(Variable("n"), "next"), New(ListNode)),
       Assignment(Variable("n"), Selection(Variable("n"), "next")),
       Assignment(Selection(Variable("n"), "value"), Constant(3)),
-      Assignment(Selection(Variable("n"), "next"), New(listNode)),
+      Assignment(Selection(Variable("n"), "next"), New(ListNode)),
       Assignment(Variable("n"), Selection(Variable("n"), "next")),
       Assignment(Selection(Variable("n"), "value"), Constant(5)),
-      Assignment(Selection(Variable("n"), "next"), New(listNode)),
+      Assignment(Selection(Variable("n"), "next"), New(ListNode)),
       Assignment(Variable("n"), Selection(Variable("n"), "next")),
       Assignment(Selection(Variable("n"), "value"), Constant(7)),
       Assignment(Selection(Variable("n"), "next"), Constant(0)),
@@ -56,8 +56,8 @@ class TestRecursive extends TestCase with AssertionsForJUnit {
 
   def testMain() {
     Execute(store)(s)
-    // Map(n -> Cell(Left(0)), 
-    //     h -> Cell(Right(Instance(None,Map(value -> Cell(Left(2)), next -> Cell(Right(Instance(None,Map(value -> Cell(Left(3)), next -> Cell(Right(Instance(None,Map(value -> Cell(Left(5)), next -> Cell(Right(Instance(None,Map(value -> Cell(Left(7)), next -> Cell(Left(0))),Map())))),Map())))),Map())))),Map()))), 
+    // Map(n -> Cell(Left(0)),
+    //     h -> Cell(Right(Instance(None,Map(value -> Cell(Left(2)), next -> Cell(Right(Instance(None,Map(value -> Cell(Left(3)), next -> Cell(Right(Instance(None,Map(value -> Cell(Left(5)), next -> Cell(Right(Instance(None,Map(value -> Cell(Left(7)), next -> Cell(Left(0))),Map())))),Map())))),Map())))),Map()))),
     //     s -> Cell(Left(17)))
     assert(store - "n" - "h" - "s" isEmpty)
     assert(store("n").get.left.get === 0)
