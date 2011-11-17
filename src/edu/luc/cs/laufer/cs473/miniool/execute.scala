@@ -28,7 +28,7 @@ object RuntimeTypes {
  */
 case class Cell(var value: Value) {
   def get = value
-  def set(value: Value) = { this.value = value ; this }
+  def set(value: Value) = { this.value = value; this }
 }
 
 /**
@@ -46,17 +46,26 @@ object Cell {
 case class Instance(zuper: Option[Instance], fields: Map[String, Cell], methods: Map[String, Method]) {
   require(zuper != null)
   require(fields != null)
-  require(! fields.contains(null))
+  require(!fields.contains(null))
   require(methods != null)
-  require(! methods.contains(null))
+  require(!methods.contains(null))
 
   def getField(name: String): Cell =
-  // TODO: your job: replace this result with a meaningful field lookup
-	Cell(0)
+    // TODO: your job: replace this result with a meaningful field lookup
+    if (fields.keys.exists(s => s == name))
+      fields(name)
+    else if (zuper != null && !zuper.isEmpty)
+      zuper.get.getField(name)
+    else
+      throw new Exception("Not found this field:" + name)
+
+  //Cell(0)
 
   def getScopedMethod(name: String): ScopedMethod =
-  // TODO: your job: replace this result with a meaningful method lookup
-	(Instance(None, Map(), Map()), (Seq(), Constant(0)))
+    // TODO: your job: replace this result with a meaningful method lookup
+    // find instance then call this line
+
+    (Instance(None, Map(), Map()), (Seq(), Constant(0)))
 }
 
 /**
@@ -68,7 +77,7 @@ object Execute {
 
   def apply(store: Store)(s: Statement): Cell = s match {
     case Constant(value) => Cell(Left(value))
-    case Plus(left, right) => binaryOperation(store, left, right, _+_)
+    case Plus(left, right) => binaryOperation(store, left, right, _ + _)
     case Variable(name) => store(name)
     case Assignment(left, right) => {
       val lvalue = apply(store)(left)
@@ -98,10 +107,10 @@ object Execute {
       val rec = apply(store)(receiver)
       // if this selection is on the receiver of the current method,
       // then look for the field in the static scope of the method
-      if (! store.contains("this") || rec.get.right.get != store("this").get.right.get) {
-    	  rec.get.right.get.getField(field)
+      if (!store.contains("this") || rec.get.right.get != store("this").get.right.get) {
+        rec.get.right.get.getField(field)
       } else {
-    	  store("scope").get.right.get.getField(field)
+        store("scope").get.right.get.getField(field)
       }
     }
     case Message(receiver, method, arguments @ _*) => {
@@ -122,8 +131,8 @@ object Execute {
       // augment the store with these new bindings
       // plus bindings for the pseudo-variables this, scope (static this), and super
       val storeWithBindings = store +
-      	("this" -> rec) + ("scope" -> Cell(Right(scope))) + ("super" -> zup) ++
-      	argBindings ++ localBindings
+        ("this" -> rec) + ("scope" -> Cell(Right(scope))) + ("super" -> zup) ++
+        argBindings ++ localBindings
       // finally execute the resulting Statement in the augmented store
       // (note that this automatically returns the result if there is one)
       apply(storeWithBindings)(meth)
