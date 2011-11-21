@@ -54,8 +54,8 @@ class TestMyInt extends TestCase with AssertionsForJUnit {
       "times" -> (Seq("result"),
         Sequence(
           Assignment(Variable("result"), New(MyInt)),
-          Message(Variable("result"), "init", Selection(Variable("this"), "value")),
-          Message(Variable("result"), "itimes", Variable("0")),
+          //Message(Variable("result"), "init", Selection(Variable("this"), "value")),
+          Message(Variable("result"), "init", Message(Variable("this"), "itimes", Variable("0"))),
           Variable("result"))),
         "intValue" -> (Seq("result"),
         	Selection(Variable("this"), "value"))
@@ -122,8 +122,8 @@ class TestMyInt extends TestCase with AssertionsForJUnit {
 	Message(Variable("x"), "init", Constant(5)),
 	Assignment(Variable("y"), New(MyInt)),
 	Message(Variable("y"), "init", Constant(-9)),
-	Assignment(Variable("t"), Message(Variable("y"), "plus", Constant(4))),
-	Assignment(Variable("k"), Message(Variable("t"), "intValue"))
+	Assignment(Variable("k"), Message(Message(Variable("y"), "plus", Constant(4)), "intValue")),
+	Assignment(Variable("t"), Message(Message(Variable("x"), "times", Constant(3)), "intValue"))
 )
     
   def testMain() {
@@ -137,5 +137,6 @@ class TestMyInt extends TestCase with AssertionsForJUnit {
     assert(store("t").get.left.get === 9)
     Execute(store)(test)
     assert(store("k").get.left.get === -5)
+    assert(store("t").get.left.get === 15)
   }
 }
