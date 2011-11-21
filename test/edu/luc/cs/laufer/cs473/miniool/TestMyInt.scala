@@ -136,7 +136,7 @@ class TestMyInt extends TestCase with AssertionsForJUnit {
     Execute(store)(c)
     assert(store("y").get.left.get === 35)
     assert(store("u").get.left.get === 48)
-    println(store("v"))
+    //println(store("v"))
     assert(store("v").get.left.get === 41)
     //only for my unit test
     Execute(store)(d)
