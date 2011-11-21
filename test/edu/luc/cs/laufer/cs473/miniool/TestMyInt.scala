@@ -47,19 +47,18 @@ class TestMyInt extends TestCase with AssertionsForJUnit {
       "minus" -> (Seq("result"),
         Sequence(
           Assignment(Variable("result"), New(MyInt)),
-          Assignment(Variable("result"), Minus(Selection(Variable("this"), "value"), Variable("0"))),
-          //Message(Variable("result"), "init", Minus(Selection(Variable("this"), "value"), Variable("0"))),
+          Message(Variable("result"), "init", Minus(Selection(Variable("this"), "value"), Variable("0"))),
           Variable("result"))),
-      "uminus" -> (Seq("result"),
-        Sequence(
-          Assignment(Variable("result"), Minus(Constant(0), Selection(Variable("this"), "value"))),
-          Variable("result"))),
+      "uminus" -> (Seq(),
+        Minus(Constant(0), Selection(Variable("this"), "value"))),
       "times" -> (Seq("result"),
         Sequence(
           Assignment(Variable("result"), New(MyInt)),
           Message(Variable("result"), "init", Selection(Variable("this"), "value")),
           Message(Variable("result"), "itimes", Variable("0")),
-          Variable("result")))
+          Variable("result"))),
+        "intValue" -> (Seq("result"),
+        	Selection(Variable("this"), "value"))
         )
  )
 
@@ -118,13 +117,14 @@ class TestMyInt extends TestCase with AssertionsForJUnit {
     Assignment(Variable("t"), Message(Variable("y"), "uminus"))
     )
     
-  val test = Sequence(
-    Assignment(Variable("x"), New(MyInt)),
-    Message(Variable("x"), "init", Constant(5)),
-    Assignment(Variable("y"), New(MyInt)),
-    Message(Variable("y"), "init", Constant(-9)),
-    Assignment(Variable("k"), Message(Variable("y"), "minus", Constant(1)))
-    )
+   val test = Sequence(
+	Assignment(Variable("x"), New(MyInt)),
+	Message(Variable("x"), "init", Constant(5)),
+	Assignment(Variable("y"), New(MyInt)),
+	Message(Variable("y"), "init", Constant(-9)),
+	Assignment(Variable("t"), Message(Variable("y"), "plus", Constant(4))),
+	Assignment(Variable("k"), Message(Variable("t"), "intValue"))
+)
     
   def testMain() {
     Execute(store)(c)
@@ -136,6 +136,6 @@ class TestMyInt extends TestCase with AssertionsForJUnit {
     assert(store("r").get.left.get === -5)
     assert(store("t").get.left.get === 9)
     Execute(store)(test)
-    assert(store("k").get.left.get === 4)
+    assert(store("k").get.left.get === -5)
   }
 }
