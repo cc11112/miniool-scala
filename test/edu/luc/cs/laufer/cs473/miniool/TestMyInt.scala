@@ -129,7 +129,8 @@ class TestMyInt extends TestCase with AssertionsForJUnit {
 	Message(Variable("y"), "init", Constant(-9)),
 	Assignment(Variable("k"), Message(Message(Variable("y"), "plus", Constant(4)), "intValue")),
 	Assignment(Variable("t"), Message(Message(Variable("x"), "times", Constant(3)), "intValue")),
-	Assignment(Variable("u"), Message(Message(Variable("x"), "minus", Constant(3)), "intValue"))
+	Assignment(Variable("u"), Message(Message(Variable("x"), "minus", Constant(3)), "intValue")),
+	Assignment(Variable("v"), Message(Message(Variable("y"), "times", Constant(0)), "intValue"))
    )
     
   def testMain() {
@@ -146,5 +147,6 @@ class TestMyInt extends TestCase with AssertionsForJUnit {
     assert(store("k").get.left.get === -5)
     assert(store("t").get.left.get === 15)
     assert(store("u").get.left.get === 2)
+    assert(store("v").get.left.get === 0)
   }
 }
