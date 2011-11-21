@@ -64,8 +64,13 @@ case class Instance(zuper: Option[Instance], fields: Map[String, Cell], methods:
   def getScopedMethod(name: String): ScopedMethod =
     // TODO: your job: replace this result with a meaningful method lookup
     // find instance then call this line
-
-    (Instance(None, Map(), Map()), (Seq(), Constant(0)))
+    if (methods.keys.exists(s => s == name))
+      (Instance(zuper, fields, methods), methods(name))
+    else if (zuper != null && !zuper.isEmpty)
+      zuper.get.getScopedMethod(name)
+    else
+      throw new Exception("Not found this method:" + name)
+  //(Instance(None, Map(), Map()), (Seq(), Constant(0)))
 }
 
 /**
@@ -78,6 +83,9 @@ object Execute {
   def apply(store: Store)(s: Statement): Cell = s match {
     case Constant(value) => Cell(Left(value))
     case Plus(left, right) => binaryOperation(store, left, right, _ + _)
+    case Minus(left, right) => binaryOperation(store, left, right, _ - _)
+    case Times(left, right) => binaryOperation(store, left, right, _ * _)
+    case Div(left, right) => binaryOperation(store, left, right, _ / _)
     case Variable(name) => store(name)
     case Assignment(left, right) => {
       val lvalue = apply(store)(left)
@@ -93,6 +101,13 @@ object Execute {
         gvalue = apply(store)(guard)
       }
       Cell.NULL
+    }
+    case If(guard, thenBranch, elseBranch) => {
+      var gvalue = apply(store)(guard)
+      if (gvalue.get.isRight || gvalue.get.left.get != 0)
+        apply(store)(thenBranch)
+      else
+        apply(store)(elseBranch)
     }
     case New(Clazz(zuper, fields, methods)) => {
       // create an object based on the list of field names and methods
