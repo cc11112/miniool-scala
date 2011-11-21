@@ -1,7 +1,7 @@
 package edu.luc.cs.laufer.cs473.miniool
 
-// TODO your job: implement the cases for Minus, Times, Div, and If below
-// TODO in addition, implement field and method lookup in Instance in
+//TODO your job: implement the cases for Minus, Times, Div, and If below
+//TODO in addition, implement field and method lookup in Instance in
 //      the presence of inheritance
 
 import SyntacticTypes.Method
