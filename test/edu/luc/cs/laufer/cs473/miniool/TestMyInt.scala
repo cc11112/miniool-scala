@@ -49,8 +49,11 @@ class TestMyInt extends TestCase with AssertionsForJUnit {
           Assignment(Variable("result"), New(MyInt)),
           Message(Variable("result"), "init", Minus(Selection(Variable("this"), "value"), Variable("0"))),
           Variable("result"))),
-      "uminus" -> (Seq(),
-        Minus(Constant(0), Selection(Variable("this"), "value"))),
+      "uminus" -> (Seq("result"),
+        Sequence(
+          Assignment(Variable("result"), New(MyInt)),
+          Message(Variable("result"), "init", Minus(Constant(0),Selection(Variable("this"), "value"))),
+          Variable("result"))),
       "times" -> (Seq("result"),
         Sequence(
           Assignment(Variable("result"), New(MyInt)),
@@ -95,11 +98,16 @@ class TestMyInt extends TestCase with AssertionsForJUnit {
     // TODO your job: replace the assignment to v by the following one:
     // v = z.minus(10).times(4).uminus().times(3).minus(7).intValue();
     //Assignment(Variable("v"), Constant(0)))
-    Message(Message(Variable("z"), "minus", Constant(10)), "times", Constant(4)))
-  Assignment(
-    Variable("v"),
-    Message(Message(Message(Variable("z"), "uminus"), "times", Constant(3)), "minus", Constant(7)))
-
+    
+    Assignment(Variable("v"), 
+        Message(
+            Message(Message(
+                Message(Message(Message(Variable("z"), "minus", Constant(10)), "times", Constant(4)), "uminus"),
+                "times", Constant(3)), "minus", Constant(7)),
+            "intValue")
+        )
+    
+	)
   /* x = new myInt
 	 * x.init(5)
 	 * r = x.uminus()
@@ -111,10 +119,10 @@ class TestMyInt extends TestCase with AssertionsForJUnit {
   val d = Sequence(
     Assignment(Variable("x"), New(MyInt)),
     Message(Variable("x"), "init", Constant(5)),
-    Assignment(Variable("r"), Message(Variable("x"), "uminus")),
+    Assignment(Variable("r"), Message(Message(Variable("x"), "uminus"),"intValue")),
     Assignment(Variable("y"), New(MyInt)),
     Message(Variable("y"), "init", Constant(-9)),
-    Assignment(Variable("t"), Message(Variable("y"), "uminus"))
+    Assignment(Variable("t"), Message(Message(Variable("y"), "uminus"),"intValue"))
     )
     
    val test = Sequence(
@@ -123,14 +131,16 @@ class TestMyInt extends TestCase with AssertionsForJUnit {
 	Assignment(Variable("y"), New(MyInt)),
 	Message(Variable("y"), "init", Constant(-9)),
 	Assignment(Variable("k"), Message(Message(Variable("y"), "plus", Constant(4)), "intValue")),
-	Assignment(Variable("t"), Message(Message(Variable("x"), "times", Constant(3)), "intValue"))
-)
+	Assignment(Variable("t"), Message(Message(Variable("x"), "times", Constant(3)), "intValue")),
+	Assignment(Variable("u"), Message(Message(Variable("x"), "minus", Constant(3)), "intValue"))
+   )
     
   def testMain() {
     Execute(store)(c)
     assert(store("y").get.left.get === 35)
     assert(store("u").get.left.get === 48)
-    //assert(store("v").get.left.get === 41)
+    println(store("v"))
+    assert(store("v").get.left.get === 41)
     //only for my unit test
     Execute(store)(d)
     assert(store("r").get.left.get === -5)
@@ -138,5 +148,6 @@ class TestMyInt extends TestCase with AssertionsForJUnit {
     Execute(store)(test)
     assert(store("k").get.left.get === -5)
     assert(store("t").get.left.get === 15)
+    assert(store("u").get.left.get === 2)
   }
 }
