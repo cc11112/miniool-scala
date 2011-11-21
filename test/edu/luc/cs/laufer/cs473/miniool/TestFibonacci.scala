@@ -32,7 +32,21 @@ val MyFib = new Clazz(
       Assignment(Selection(Variable("this"), "value"), Variable("0"))),
     "helpFib" -> (Seq(),
     // TODO your job
-    Constant(1)),
+        Sequence(
+            If(Selection(Variable("this"), "value"), Constant(0), 
+    	         If(Minus(Selection(Variable("this"), "value"), Variable("0")), Variable("1"),
+    	             Sequence(Message(Variable("this"), "fib", 
+    	                 Plus(Variable("0"), Constant(1)), 
+    	                 Plus(Variable("1"), Variable("2")), 
+    	                 Variable("1")
+    	                 ),
+    	                 Selection(Variable("this"), "value")
+    	                 )
+    	             )
+           ),
+           Selection(Variable("this"), "value")
+    	 )
+    ),
     "fib" -> (Seq(), Message(Variable("this"), "helpFib", Constant(1), Constant(1), Constant(0)))
   ))
 

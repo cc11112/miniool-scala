@@ -65,7 +65,8 @@ case class Instance(zuper: Option[Instance], fields: Map[String, Cell], methods:
     // TODO: your job: replace this result with a meaningful method lookup
     // find instance then call this line
     if (methods.keys.exists(s => s == name))
-      (Instance(zuper, fields, methods), methods(name))
+      (this, methods(name))
+      //(Instance(zuper, fields, methods), methods(name))
     else if (zuper != null && !zuper.isEmpty)
       zuper.get.getScopedMethod(name)
     else
