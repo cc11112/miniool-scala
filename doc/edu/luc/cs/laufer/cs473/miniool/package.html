@@ -1,0 +1,322 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>edu.luc.cs.laufer.cs473.miniool</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link type="text/css" media="screen" rel="stylesheet" href="../../../../../../lib/template.css" />
+      <script type="text/javascript" src="../../../../../../lib/jquery.js"></script>
+      <script type="text/javascript" src="../../../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../../../lib/tools.tooltip.js"></script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img src="../../../../../../lib/package_big.png" />
+        <p id="owner"><a name="edu" class="extype" href="../../../../../package.html">edu</a>.<a name="edu.luc" class="extype" href="../../../../package.html">luc</a>.<a name="edu.luc.cs" class="extype" href="../../../package.html">cs</a>.<a name="edu.luc.cs.laufer" class="extype" href="../../package.html">laufer</a>.<a name="edu.luc.cs.laufer.cs473" class="extype" href="../package.html">cs473</a></p>
+        <h1>miniool</h1>
+      </div>
+
+      <h4 class="signature" id="signature">
+      <span class="kind">package</span>
+      <span class="symbol"> 
+        <span class="name">miniool</span>
+        
+        
+      </span>
+      </h4>
+      
+          <div class="fullcommenttop" id="comment"></div>
+        
+
+      <div id="template">
+
+        <div id="mbrsel">
+          <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
+          
+          
+          <div id="visbl">
+              <span class="filtertype">Visibility</span>
+              <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+            </div>
+        </div>
+
+        
+
+        <div class="types members" id="types">
+              <h3>Type Members</h3>
+              <ol><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.Assignment" data-isabs="false">
+      <a id="Assignment:Assignment"></a>
+      <h4 class="signature">
+      <span class="kind">case class</span>
+      <span class="symbol"> 
+        <a href="Assignment.html"><span class="name">Assignment</span></a>
+        
+        <span class="params">(<span name="left">left: Statement</span>, <span name="right">right: Statement</span>)</span><span class="result"> extends BinaryStatement with Product with Serializable</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.BinaryStatement" data-isabs="true">
+      <a id="BinaryStatement:BinaryStatement"></a>
+      <h4 class="signature">
+      <span class="kind">class</span>
+      <span class="symbol"> 
+        <a href="BinaryStatement.html"><span class="name">BinaryStatement</span></a>
+        
+        <span class="result"> extends Statement</span>
+      </span>
+      </h4>
+      <p class="comment cmt">A binary statement with two non-null children.</p>
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.Cell" data-isabs="false">
+      <a id="Cell:Cell"></a>
+      <h4 class="signature">
+      <span class="kind">case class</span>
+      <span class="symbol"> 
+        <a href="Cell.html"><span class="name">Cell</span></a>
+        
+        <span class="params">(<span name="value">value: Value</span>)</span><span class="result"> extends Product with Serializable</span>
+      </span>
+      </h4>
+      <p class="comment cmt">A cell for storing a value (either a number or an object).</p>
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.Clazz" data-isabs="false">
+      <a id="Clazz:Clazz"></a>
+      <h4 class="signature">
+      <span class="kind">case class</span>
+      <span class="symbol"> 
+        <a href="Clazz.html"><span class="name">Clazz</span></a>
+        
+        <span class="params">(<span name="zuper">zuper: Option[Clazz]</span>, <span name="fields">fields: Seq[String]</span>, <span name="methods">methods: Seq[()]</span>)</span><span class="result"> extends Product with Serializable</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Syntax for classes.</p>
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.Constant" data-isabs="false">
+      <a id="Constant:Constant"></a>
+      <h4 class="signature">
+      <span class="kind">case class</span>
+      <span class="symbol"> 
+        <a href="Constant.html"><span class="name">Constant</span></a>
+        
+        <span class="params">(<span name="value">value: Int</span>)</span><span class="result"> extends Statement with Product with Serializable</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Syntax for applicative (side-effect-free) statements.</p>
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.Div" data-isabs="false">
+      <a id="Div:Div"></a>
+      <h4 class="signature">
+      <span class="kind">case class</span>
+      <span class="symbol"> 
+        <a href="Div.html"><span class="name">Div</span></a>
+        
+        <span class="params">(<span name="left">left: Statement</span>, <span name="right">right: Statement</span>)</span><span class="result"> extends BinaryStatement with Product with Serializable</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.If" data-isabs="false">
+      <a id="If:If"></a>
+      <h4 class="signature">
+      <span class="kind">case class</span>
+      <span class="symbol"> 
+        <a href="If.html"><span class="name">If</span></a>
+        
+        <span class="params">(<span name="guard">guard: Statement</span>, <span name="thenBranch">thenBranch: Statement</span>, <span name="elseBranch">elseBranch: Statement</span>)</span><span class="result"> extends Statement with Product with Serializable</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.Instance" data-isabs="false">
+      <a id="Instance:Instance"></a>
+      <h4 class="signature">
+      <span class="kind">case class</span>
+      <span class="symbol"> 
+        <a href="Instance.html"><span class="name">Instance</span></a>
+        
+        <span class="params">(<span name="zuper">zuper: Option[Instance]</span>, <span name="fields">fields: Map[String, Cell]</span>, <span name="methods">methods: Map[String, ()]</span>)</span><span class="result"> extends Product with Serializable</span>
+      </span>
+      </h4>
+      <p class="comment cmt">An object (instance) has an optional superclass instance, a map from field
+names to variables, and a map from method names to methods.</p>
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.Message" data-isabs="false">
+      <a id="Message:Message"></a>
+      <h4 class="signature">
+      <span class="kind">case class</span>
+      <span class="symbol"> 
+        <a href="Message.html"><span class="name">Message</span></a>
+        
+        <span class="params">(<span name="receiver">receiver: Statement</span>, <span name="method">method: String</span>, <span name="arguments">arguments: Statement*</span>)</span><span class="result"> extends Statement with Product with Serializable</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.Minus" data-isabs="false">
+      <a id="Minus:Minus"></a>
+      <h4 class="signature">
+      <span class="kind">case class</span>
+      <span class="symbol"> 
+        <a href="Minus.html"><span class="name">Minus</span></a>
+        
+        <span class="params">(<span name="left">left: Statement</span>, <span name="right">right: Statement</span>)</span><span class="result"> extends BinaryStatement with Product with Serializable</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.New" data-isabs="false">
+      <a id="New:New"></a>
+      <h4 class="signature">
+      <span class="kind">class</span>
+      <span class="symbol"> 
+        <a href="New.html"><span class="name">New</span></a>
+        
+        <span class="result"> extends Statement</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Syntax for statements for creating and using records.</p>
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.Plus" data-isabs="false">
+      <a id="Plus:Plus"></a>
+      <h4 class="signature">
+      <span class="kind">case class</span>
+      <span class="symbol"> 
+        <a href="Plus.html"><span class="name">Plus</span></a>
+        
+        <span class="params">(<span name="left">left: Statement</span>, <span name="right">right: Statement</span>)</span><span class="result"> extends BinaryStatement with Product with Serializable</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.Selection" data-isabs="false">
+      <a id="Selection:Selection"></a>
+      <h4 class="signature">
+      <span class="kind">case class</span>
+      <span class="symbol"> 
+        <a href="Selection.html"><span class="name">Selection</span></a>
+        
+        <span class="params">(<span name="receiver">receiver: Statement</span>, <span name="field">field: String</span>)</span><span class="result"> extends Statement with Product with Serializable</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.Sequence" data-isabs="false">
+      <a id="Sequence:Sequence"></a>
+      <h4 class="signature">
+      <span class="kind">case class</span>
+      <span class="symbol"> 
+        <a href="Sequence.html"><span class="name">Sequence</span></a>
+        
+        <span class="params">(<span name="statements">statements: Statement*</span>)</span><span class="result"> extends Statement with Product with Serializable</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.Statement" data-isabs="true">
+      <a id="Statement:Statement"></a>
+      <h4 class="signature">
+      <span class="kind">class</span>
+      <span class="symbol"> 
+        <a href="Statement.html"><span class="name">Statement</span></a>
+        
+        <span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      <p class="comment cmt">An abstract superclass for concrete Statement implementation classes.</p>
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.Times" data-isabs="false">
+      <a id="Times:Times"></a>
+      <h4 class="signature">
+      <span class="kind">case class</span>
+      <span class="symbol"> 
+        <a href="Times.html"><span class="name">Times</span></a>
+        
+        <span class="params">(<span name="left">left: Statement</span>, <span name="right">right: Statement</span>)</span><span class="result"> extends BinaryStatement with Product with Serializable</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.Variable" data-isabs="false">
+      <a id="Variable:Variable"></a>
+      <h4 class="signature">
+      <span class="kind">case class</span>
+      <span class="symbol"> 
+        <a href="Variable.html"><span class="name">Variable</span></a>
+        
+        <span class="params">(<span name="name">name: String</span>)</span><span class="result"> extends Statement with Product with Serializable</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Syntax for imperative statements, that is, those that are interesting because of their
+side effects.</p>
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.While" data-isabs="false">
+      <a id="While:While"></a>
+      <h4 class="signature">
+      <span class="kind">case class</span>
+      <span class="symbol"> 
+        <a href="While.html"><span class="name">While</span></a>
+        
+        <span class="params">(<span name="guard">guard: Statement</span>, <span name="body">body: Statement</span>)</span><span class="result"> extends BinaryStatement with Product with Serializable</span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+        
+        
+
+        <div class="values members" id="values">
+              <h3>Value Members</h3>
+              <ol><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.Cell" data-isabs="false">
+      <a id="Cell:Cell"></a>
+      <h4 class="signature">
+      <span class="kind">object</span>
+      <span class="symbol"> 
+        <a href="Cell$.html"><span class="name">Cell</span></a>
+        
+        <span class="result"> extends Serializable</span>
+      </span>
+      </h4>
+      <p class="comment cmt">A companion object defining a useful Cell instance.</p>
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.Execute" data-isabs="false">
+      <a id="Execute:Execute"></a>
+      <h4 class="signature">
+      <span class="kind">object</span>
+      <span class="symbol"> 
+        <a href="Execute$.html"><span class="name">Execute</span></a>
+        
+        <span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      <p class="comment cmt">An interpreter for expressions and statements.</p>
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.New" data-isabs="false">
+      <a id="New:New"></a>
+      <h4 class="signature">
+      <span class="kind">object</span>
+      <span class="symbol"> 
+        <a href="New$.html"><span class="name">New</span></a>
+        
+        <span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.RuntimeTypes" data-isabs="false">
+      <a id="RuntimeTypes:RuntimeTypes"></a>
+      <h4 class="signature">
+      <span class="kind">object</span>
+      <span class="symbol"> 
+        <a href="RuntimeTypes$.html"><span class="name">RuntimeTypes</span></a>
+        
+        <span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="edu.luc.cs.laufer.cs473.miniool.SyntacticTypes" data-isabs="false">
+      <a id="SyntacticTypes:SyntacticTypes"></a>
+      <h4 class="signature">
+      <span class="kind">object</span>
+      <span class="symbol"> 
+        <a href="SyntacticTypes$.html"><span class="name">SyntacticTypes</span></a>
+        
+        <span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+
+        
+
+      </div>
+      
+      <div id="tooltip"></div>
+      
+    </body>
+      </html>
